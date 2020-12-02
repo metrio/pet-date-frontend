@@ -10,9 +10,9 @@
 
 }
 
-#toy-header img {
+#pet-header img {
     height: 150px;
-    width: 20px;
+    width: 100px;
 }
 
 #pet-collection {
@@ -21,12 +21,18 @@
 
 .card {
   text-align: center;
+  border-radius: 1rem;
   border: grey solid 1px;
   padding: 1rem;
   width: 15rem;
-  height: 25rem;
+  height: 20rem;
   display: inline-grid;
   margin: 1rem 2rem;
   box-shadow: 3px 4px #FF8C94 
 }
 
+.pet-avatar {
+    justify-self: center;
+    height: 11rem;
+    width: auto;
+}
