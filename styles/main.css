@@ -37,24 +37,6 @@
     width: auto;
 }
 
-#show-pet {
-  text-align: right;
-  border-radius: 1rem;
-  border: grey solid 1px;
-  padding: 1rem;
-  width: auto;
-  height: 12rem;
-  display: flex;
-  margin: 1rem 2rem;
-  box-shadow: 3px 4px #FF8C94 
-}
-
-#show-pet img {
-    image-orientation: left;
-    border-radius: 50%;
-    height: 150px;
-    width: auto;
-}
 
 .modal-container {
   height: 100vh;
@@ -75,7 +57,7 @@
 }
 
 .modal-content img{
-  image-orientation: left;
+    image-orientation: left;
     border-radius: 50%;
     height: 150px;
     width: auto;

@@ -7,12 +7,12 @@ let allDates;
 let toggle = "hide"
 toggleModal(toggle)
 
-/** URL variables */
+/***************** URL variables *****************/
 const petUrl = "http://localhost:3000/api/v1/pets"
 const pdUrl = "http://localhost:3000/api/v1/playdates"
 
 // INITIAL 
-/** All Database Fetches */
+/*********** All Database Fetches ***************/
 function fetchPets() {
   fetch(petUrl)
     .then((resp) => resp.json())
@@ -50,7 +50,7 @@ function deletePlaydate(id) {
 }
 
 
-/** Buttons */
+/***************** Buttons ***********************/
 // Add Playdates button
 modalContent.addEventListener("click", (event) => {
   if (event.target.matches("#pd-button")) {
@@ -88,7 +88,7 @@ modalContent.addEventListener("click", event => {
   deletePlaydate(id)}
 })
 
-/** Rendering Functions */
+/*************** Rendering Functions ****************/
 
 // Rendering Preliminary Data of all pets onto cards
 const renderPets = (pet) => {
@@ -181,7 +181,7 @@ const renderPet = (petObj) => {
  
 }
 
-/** Modal Functions */
+/************ Modal Functions **********/
 //Toggle modal
 function toggleModal() {
   modal.classList.toggle(`${toggle}`)
