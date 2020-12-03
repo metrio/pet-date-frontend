@@ -123,7 +123,7 @@ const renderPets = (pet) => {
 }
 
 
-// renderPet renders inside top div to make edit/PATCH, possibly delete
+// renderPet renders inside modal to make edit/PATCH, possibly delete
 const renderPet = (petObj) => {
     
   const petName = document.createElement("h2")
