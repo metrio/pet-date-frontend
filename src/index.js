@@ -45,7 +45,7 @@ function deletePlaydate(id) {
  .then(data => {
    
    li = document.querySelector(`li[data-id="${data.id}"]`)
-   console.log(li)
+  //  console.log(li)
  })
 }
 
