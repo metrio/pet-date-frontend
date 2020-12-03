@@ -1,18 +1,18 @@
 //Original variables
 const petContainer = document.querySelector("#pet-collection")
-// const showPet = document.querySelector("#show-pet")
 const modal = document.querySelector(".modal-container")
 const modalContent = document.querySelector(".modal-content")
 
-let deleteBtn;
 let allDates;
 let toggle = "hide"
 toggleModal(toggle)
 
+/** URL variables */
 const petUrl = "http://localhost:3000/api/v1/pets"
 const pdUrl = "http://localhost:3000/api/v1/playdates"
 
-// INITIAL RENDER
+// INITIAL 
+/** All Database Fetches */
 function fetchPets() {
   fetch(petUrl)
     .then((resp) => resp.json())
@@ -23,89 +23,35 @@ function fetchPets() {
     })
 }
 
-// EVENT HANDLERS
-// fetch sends details of petObj so we can render to top div
+// Fetch Data to render onto Modal
 const petDetails = (id) => {
-    fetch(`${petUrl}/${id}`)
-      .then((resp) => resp.json())
-      .then((petObj) => {
-        renderPet(petObj)
-      });
+  fetch(`${petUrl}/${id}`)
+    .then((resp) => resp.json())
+    .then((petObj) => {
+      renderPet(petObj)
+    });
 };
 
-// renderPet renders inside top div to make edit/PATCH, possibly delete
-const renderPet = (petObj) => {
-    
-//   const showPet = document.querySelector("#show-pet")
-  const petName = document.createElement("h2")
-  const petBreed = document.createElement("h3")
-  const petAge = document.createElement("h3")
-  const showPetText = document.createElement("p")
-  const petImg = document.createElement("img")
-  const petPersonality = document.createElement("h4")
-  // variable created so we can append playdates
-   allDates = document.createElement("ul")
-  const makePlaydateBtn = document.createElement("button")
-  
-  
-
-  modalContent.innerHTML = ""
-  petName.textContent = `Name: ${petObj.name}`
-  petBreed.textContent = `Breed: ${petObj.breed}`
-  petImg.src = petObj.img
-  petPersonality.textContent = `Personality: ${petObj.temper}`
-  allDates.textContent = "Playdates"
-
-  makePlaydateBtn.textContent = "Wanna Play?"
-  makePlaydateBtn.dataset.id = petObj.id
-  makePlaydateBtn.id = ("pd-button")
-  
-
-  if (petObj.age > 1) {
-    petAge.textContent = `Age: ${petObj.age} years old`
-  } else {
-    petAge.textContent = `Age; ${petObj.age} year old`
-  }
-  // iterates thru to render playdate info
-  function playDates(petObj) {
-    petObj.playdates.forEach(playdate => {
-      const date = document.createElement("li")
-      deleteBtn = document.createElement("button")
-
-      deleteBtn.textContent = "Cancel Playdate"
-      deleteBtn.dataset.id = playdate.id
-
-      // if (playdate !== [{}]) {
-
-      date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
-      date.append(deleteBtn)
-      allDates.append(date)
-      // }
-      // else {
-      //   date.textContent = "I don't have any playdates scheduled."
-      //   allDates.append(date)
-      // }
-      // console.log(playdate)
-
-    })
+//fetch Delete Playdate
+function deletePlaydate(id) {
+ fetch(`${pdUrl}/${id}`, {
+   method: `DELETE`,
+   headers: {
+     'Content-Type': 'application/json',
+     'Accept': 'application/json',
+   }
+ })
+ .then(resp => resp.json())
+ .then(data => {
    
-  }
-
-  playDates(petObj)
-
-  showPetText.append(petName, petBreed, petAge, petPersonality)
-  modalContent.append(petImg, showPetText, allDates, makePlaydateBtn)
-};
-
-//Toggle modal
-function toggleModal() {
-     modal.classList.toggle(`${toggle}`)
-     modalContent.classList.toggle(".show")
- 
+   li = document.querySelector(`li[data-id="${data.id}"]`)
+   console.log(li)
+ })
 }
 
 
-// update button
+/** Buttons */
+// Add Playdates button
 modalContent.addEventListener("click", (event) => {
   if (event.target.matches("#pd-button")) {
     const id = event.target.dataset.id
@@ -135,20 +81,16 @@ modalContent.addEventListener("click", (event) => {
   }
 })
 
-function deletePlaydate(id) {
+//delete button
+modalContent.addEventListener("click", event => {
+   if(event.target.matches(".pd-delete")) {
+   const id = event.target.dataset.id
+  deletePlaydate(id)}
+})
 
-  fetch(`${pdUrl}/${id}`, {
-    method: `DELETE`,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    }
-  })
-  .then(resp => resp.json())
-  .then(console.log)
-}
+/** Rendering Functions */
 
-// render all pets to page
+// Rendering Preliminary Data of all pets onto cards
 const renderPets = (pet) => {
   const petDiv = document.createElement("div")
   const petImg = document.createElement("img")
@@ -178,6 +120,82 @@ const renderPets = (pet) => {
   petDiv.append(petImg, petName, petButton, petType)
 
   petContainer.append(petDiv)
+}
+
+
+// renderPet renders inside top div to make edit/PATCH, possibly delete
+const renderPet = (petObj) => {
+    
+  const petName = document.createElement("h2")
+  const petBreed = document.createElement("h3")
+  const petAge = document.createElement("h3")
+  const showPetText = document.createElement("p")
+  const petImg = document.createElement("img")
+  const petPersonality = document.createElement("h4")
+  // variable created so we can append playdates
+   allDates = document.createElement("ul")
+  const makePlaydateBtn = document.createElement("button")
+  
+  
+  modalContent.innerHTML = ""
+  petName.textContent = `Name: ${petObj.name}`
+  petBreed.textContent = `Breed: ${petObj.breed}`
+  petImg.src = petObj.img
+  petPersonality.textContent = `Personality: ${petObj.temper}`
+  allDates.textContent = "Playdates"
+
+  makePlaydateBtn.textContent = "Wanna Play?"
+  makePlaydateBtn.dataset.id = petObj.id
+  makePlaydateBtn.id = ("pd-button")
+  
+
+  if (petObj.age > 1) {
+    petAge.textContent = `Age: ${petObj.age} years old`
+  } else {
+    petAge.textContent = `Age; ${petObj.age} year old`
+  }
+  
+  
+  // iterates thru to render playdate info
+  function playDates(petObj) {
+    petObj.playdates.forEach(playdate => {
+      const date = document.createElement("li")
+      const deleteBtn = document.createElement("button")
+
+      deleteBtn.textContent = "Cancel Playdate"
+      deleteBtn.dataset.id = playdate.id
+      deleteBtn.className = "pd-delete"
+      // deleteBtn.addEventListener("click", console.log(deleteBtn.dataset.id))
+
+      // if (playdate !== [{}]) {
+
+      date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
+      date.append(deleteBtn)
+      allDates.append(date)
+      // }
+      // else {
+      //   date.textContent = "I don't have any playdates scheduled."
+      //   allDates.append(date)
+      // }
+      // console.log(playdate)
+
+    })
+   
+  }
+
+  playDates(petObj)
+
+  showPetText.append(petName, petBreed, petAge, petPersonality)
+  modalContent.append(petImg, showPetText, allDates, makePlaydateBtn)
+}; // refactor later
+
+
+/** Modal Functions */
+//Toggle modal
+function toggleModal() {
+  modal.classList.toggle(`${toggle}`)
+  modalContent.classList.toggle(".show")
+
 }
 
 fetchPets()
