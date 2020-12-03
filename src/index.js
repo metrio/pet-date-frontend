@@ -132,8 +132,6 @@ const renderPet = (petObj) => {
   const showPetText = document.createElement("p")
   const petImg = document.createElement("img")
   const petPersonality = document.createElement("h4")
-  // variable created so we can append playdates
-   allDates = document.createElement("ul")
   const makePlaydateBtn = document.createElement("button")
   
   
@@ -142,6 +140,9 @@ const renderPet = (petObj) => {
   petBreed.textContent = `Breed: ${petObj.breed}`
   petImg.src = petObj.img
   petPersonality.textContent = `Personality: ${petObj.temper}`
+  
+  // variable created so we can append playdates
+  allDates = document.createElement("ul")
   allDates.textContent = "Playdates"
 
   makePlaydateBtn.textContent = "Wanna Play?"
@@ -155,47 +156,36 @@ const renderPet = (petObj) => {
     petAge.textContent = `Age; ${petObj.age} year old`
   }
   
-  
-  // iterates thru to render playdate info
-  function playDates(petObj) {
-    petObj.playdates.forEach(playdate => {
-      const date = document.createElement("li")
-      const deleteBtn = document.createElement("button")
-
-      deleteBtn.textContent = "Cancel Playdate"
-      deleteBtn.dataset.id = playdate.id
-      deleteBtn.className = "pd-delete"
-      // deleteBtn.addEventListener("click", console.log(deleteBtn.dataset.id))
-
-      // if (playdate !== [{}]) {
-
-      date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
-      date.append(deleteBtn)
-      allDates.append(date)
-      // }
-      // else {
-      //   date.textContent = "I don't have any playdates scheduled."
-      //   allDates.append(date)
-      // }
-      // console.log(playdate)
-
-    })
-   
-  }
-
   playDates(petObj)
 
   showPetText.append(petName, petBreed, petAge, petPersonality)
   modalContent.append(petImg, showPetText, allDates, makePlaydateBtn)
-}; // refactor later
+};
 
+
+ // Iterates thru to render playdate info onto Modal
+ function playDates(petObj) {
+  petObj.playdates.forEach(playdate => {
+    const date = document.createElement("li")
+    const deleteBtn = document.createElement("button")
+
+    deleteBtn.textContent = "Cancel Playdate"
+    deleteBtn.dataset.id = playdate.id
+    deleteBtn.className = "pd-delete"
+    
+
+    date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
+    date.append(deleteBtn)
+    allDates.append(date)
+  })
+ 
+}
 
 /** Modal Functions */
 //Toggle modal
 function toggleModal() {
   modal.classList.toggle(`${toggle}`)
   modalContent.classList.toggle(".show")
-
 }
 
 fetchPets()
