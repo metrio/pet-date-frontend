@@ -185,7 +185,13 @@ const renderPet = (petObj) => {
 //Toggle modal
 function toggleModal() {
   modal.classList.toggle(`${toggle}`)
-  modalContent.classList.toggle(".show")
+  modalContent.classList.toggle(`${toggle}`)
 }
+
+modal.addEventListener("click", event =>{
+  event.target.matches(".modal-container")
+  toggle = "hide"
+  toggleModal(toggle)
+})
 
 fetchPets()
