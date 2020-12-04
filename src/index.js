@@ -51,6 +51,8 @@ function deletePlaydate(id) {
     })
 }
 
+
+/*********** Playdate Posting to Backend **********/
 const pdPost = (pdObj) => {
   fetch(`${pdUrl}`, {
     method: 'POST',
@@ -84,6 +86,36 @@ const pdPost = (pdObj) => {
     })
 }
 
+/************* Playdate Updating Backend **************/
+const pdUpdate = (newpdObj) => {
+  fetch(`${pdUrl}/${newpdObj.id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify(newpdObj)
+  })
+    .then(response => response.json())
+    .then(data => {
+      li = document.querySelector(`li[data-id="${data.id}"]`)
+      li.textContent = `Date:${data.date}, Location:${data.location}`
+
+      const deleteBtn = document.createElement("button")
+      const updateBtn = document.createElement("button")
+      
+      deleteBtn.textContent = "Cancel Playdate"
+      deleteBtn.dataset.id = data.id
+      deleteBtn.className = "pd-delete"
+
+      updateBtn.textContent = "Update Our Playdate"
+      updateBtn.dataset.id = data.id
+      updateBtn.className = "pd-update"
+
+      li.append(deleteBtn, updateBtn)
+    })
+}
+
 
 /***************** Buttons ***********************/
 // Add Playdates button
@@ -109,15 +141,17 @@ modalContent.addEventListener("click", event => {
 modalContent.addEventListener("click", event => {
   if (event.target.matches(".pd-update")){
     const id = event.target.dataset.id
+    console.log(event.target)
 
-    // updatePDObj = {
-    //   id: id,
-    //   pet_id: ,
-    //   pet2_id: ,
-    //   date: ,
-    //   location: 
+    oldPDObj = {
+      id: id,
+      pet_id: event.target.dataset.pet,
+      pet2_id: event.target.dataset.pet2,
+      date: event.target.dataset.date,
+      location: event.target.dataset.location
 
-    // }
+    }
+    playdateUpdate(oldPDObj)
   }
 })
 
@@ -260,63 +294,53 @@ const createPlayDateForm = (petid) => {
 
     pdObj = {
       pet_id: petid,
-      pet2_id: 121,
+      pet2_id: 1,
       date: form.date.value,
       location: form.location.value
     } 
     
     pdPost(pdObj)
+    form.style.display = "none"
   })
 }
 
-//Updating needs to be adjust potentially refactored from Create
-const playdateUpdate = (petid) => {
+//Updating Form 
+const playdateUpdate = (oldPDObj) => {
+  console.log(oldPDObj)
+
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")
   const submitBtn = document.createElement("button")
 
   submitBtn.className = "submit-pd"
-  submitBtn.textContent = "Create Playdate"
+  submitBtn.textContent = "Update Playdate"
 
   locationInput.id = "location"
-  locationInput.placeholder = "enter location..."
+  locationInput.value = oldPDObj.location
   
   dateInput.type = "date"
+  dateInput.value = oldPDObj.date
   dateInput.id = "date"
   form.append(dateInput, locationInput, submitBtn)
   modalContent.append(form)
 
   submitBtn.addEventListener("click", event =>{
     event.preventDefault()
-    const form = document.createElement("form")
-    const locationInput = document.createElement("input")
-    const dateInput = document.createElement("input")
-    const submitBtn = document.createElement("button")
-  
-    submitBtn.className = "submit-pd"
-    submitBtn.textContent = "Create Playdate"
-  
-    locationInput.id = "location"
-    locationInput.placeholder = "enter location..."
-    
-    dateInput.type = "date"
-    dateInput.id = "date"
-    form.append(dateInput, locationInput, submitBtn)
-    modalContent.append(form)
 
-    pdObj = {
-      pet_id: petid,
-      pet2_id: 121,
+    newpdObj = {
+      id: oldPDObj.id,
+      pet_id: oldPDObj.petid,
+      pet2_id: oldPDObj.pet2_id,
       date: form.date.value,
       location: form.location.value
     } 
     
-    pdPost(pdObj)
+    pdUpdate(newpdObj)
+    form.style.display = "none"
   })
 
 }
-
 
 
 
