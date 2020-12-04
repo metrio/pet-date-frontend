@@ -386,7 +386,6 @@ const renderPetForm = () => {
   petImageInput.id = "image"
   petImageInput.placeholder = "Url link of your Pet"
   
- 
 
   petForm.append(petNameInput, petTemperInput, petAgeInput, petBreedInput, petGenderInput,
      petSpeciesInput, petImageInput, petSubmitBtn)
