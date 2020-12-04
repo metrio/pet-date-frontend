@@ -297,6 +297,7 @@ const createPlayDateForm = (petid) => {
 
   friendInput.type = "select"
   friendInput.placeholder = "invite a friend..."
+ 
   friendInput.id = "friend"
 
   form.append(dateInput, friendInput, locationInput, submitBtn)
