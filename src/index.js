@@ -5,6 +5,8 @@ const modalContent = document.querySelector(".modal-content")
 const newPetButton = document.querySelector(".add-pet")
 const navSpan = document.querySelector("#nav-span")
 
+let simplePetArray = []
+
 
 let allDates;
 let toggle = "hide"
@@ -18,14 +20,16 @@ const pdUrl = "http://localhost:3000/api/v1/playdates"
 /*********** All Database Fetches ***************/
 function fetchPets() {
   fetch(petUrl)
-    .then((resp) => resp.json())
-    .then((petArray) => {
-      petArray.forEach((pet) => {
-        renderPets(pet)
-      })
+  .then((resp) => resp.json())
+  .then((petArray) => {
+    petArray.forEach((pet) => {
+      renderPets(pet)
+      simplePetArray.push(pet.name)
     })
+  })
 }
 
+console.log(simplePetArray)
 // Fetch Data to render onto Modal
 const petDetails = (id) => {
   fetch(`${petUrl}/${id}`)
@@ -283,7 +287,7 @@ const createPlayDateForm = (petid) => {
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")
-  const friendInput = document.createElement("input")
+  const friendInput = document.createElement("select")
   const submitBtn = document.createElement("button")
 
   submitBtn.className = "submit-pd"
@@ -296,9 +300,19 @@ const createPlayDateForm = (petid) => {
   dateInput.id = "date"
 
   friendInput.type = "select"
-  friendInput.placeholder = "invite a friend..."
- 
-  friendInput.id = "friend"
+  friendInput.id = "friends"
+  friendInput.name = "friendlist"
+  friendInput.form = "friendform"
+
+  for (i = 0; i < simplePetArray.length ; i++){
+    const petOption = document.createElement('option')
+    petOption.value = simplePetArray[i]
+    petOption.textContent = simplePetArray[i]
+    petOption.dataset.id = i + 1
+
+    friendInput.append(petOption)
+  }
+
 
   form.append(dateInput, friendInput, locationInput, submitBtn)
   modalContent.append(form)
