@@ -1,4 +1,4 @@
-//Original variables
+//DOM ELEMENT/VARIABLES
 const petContainer = document.querySelector("#pet-collection")
 const modal = document.querySelector(".modal-container")
 const modalContent = document.querySelector(".modal-content")
@@ -197,7 +197,7 @@ const renderPets = (pet) => {
 }
 
 
-// renderPet renders inside modal to make edit/PATCH, possibly delete
+// renderPet renders inside modal
 const renderPet = (petObj) => {
 
   const petName = document.createElement("h2")
@@ -283,6 +283,7 @@ const createPlayDateForm = (petid) => {
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")
+  const friendInput = document.createElement("input")
   const submitBtn = document.createElement("button")
 
   submitBtn.className = "submit-pd"
@@ -293,7 +294,12 @@ const createPlayDateForm = (petid) => {
   
   dateInput.type = "date"
   dateInput.id = "date"
-  form.append(dateInput, locationInput, submitBtn)
+
+  friendInput.type = "select"
+  friendInput.placeholder = "invite a friend..."
+  friendInput.id = "friend"
+
+  form.append(dateInput, friendInput, locationInput, submitBtn)
   modalContent.append(form)
 
   submitBtn.addEventListener("click", event =>{
@@ -393,7 +399,7 @@ const renderPetForm = () => {
   navSpan.append(petForm)
 
   petSubmitBtn.addEventListener("click", event =>{
-    event.preventDefault()
+    // event.preventDefault()
 
     addPetObj = {
       name: petForm.name.value,
@@ -425,7 +431,9 @@ const createPet = (addPetObj) => {
   body: JSON.stringify(addPetObj)
 })
   .then(response => response.json())
-  .then(console.log)
+  .then(newPetObj => {
+    renderPets(newPetObj)
+    console.log})
 
 
 }

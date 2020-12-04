@@ -29,6 +29,7 @@
 
 #pet-collection {
     margin: 2rem;
+    flex-wrap: wrap;
 }
 
 .card {
