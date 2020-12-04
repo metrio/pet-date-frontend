@@ -107,7 +107,7 @@ modalContent.addEventListener("click", event => {
 
 //update playdate Button
 modalContent.addEventListener("click", event => {
-  if (event.target.matches(".pd-update")){c
+  if (event.target.matches(".pd-update")){
     const id = event.target.dataset.id
 
     // updatePDObj = {
@@ -289,6 +289,21 @@ const playdateUpdate = (petid) => {
 
   submitBtn.addEventListener("click", event =>{
     event.preventDefault()
+    const form = document.createElement("form")
+    const locationInput = document.createElement("input")
+    const dateInput = document.createElement("input")
+    const submitBtn = document.createElement("button")
+  
+    submitBtn.className = "submit-pd"
+    submitBtn.textContent = "Create Playdate"
+  
+    locationInput.id = "location"
+    locationInput.placeholder = "enter location..."
+    
+    dateInput.type = "date"
+    dateInput.id = "date"
+    form.append(dateInput, locationInput, submitBtn)
+    modalContent.append(form)
 
     pdObj = {
       pet_id: petid,
@@ -302,23 +317,6 @@ const playdateUpdate = (petid) => {
 
 }
 
-const renderForm = () =>{
-  const form = document.createElement("form")
-  const locationInput = document.createElement("input")
-  const dateInput = document.createElement("input")
-  const submitBtn = document.createElement("button")
-
-  submitBtn.className = "submit-pd"
-  submitBtn.textContent = "Create Playdate"
-
-  locationInput.id = "location"
-  locationInput.placeholder = "enter location..."
-  
-  dateInput.type = "date"
-  dateInput.id = "date"
-  form.append(dateInput, locationInput, submitBtn)
-  modalContent.append(form)
-}
 
 
 
