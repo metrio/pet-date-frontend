@@ -68,11 +68,18 @@ const pdPost = (pdObj) => {
       li.textContent = `Date: ${pdObj.date}, Location: ${pdObj.location}`
 
       const deleteBtn = document.createElement("button")
+      const updateBtn = document.createElement("button")
 
       deleteBtn.textContent = "Cancel Playdate"
       deleteBtn.dataset.id = pdObj.id
       deleteBtn.className = "pd-delete"
-      li.append(deleteBtn)
+
+      updateBtn.textContent = "Update Our Playdate"
+      updateBtn.dataset.id = pdObj.id
+      updateBtn.className = "pd-update"
+
+
+      li.append(deleteBtn, updateBtn)
       allDates.append(li)
     })
 }
@@ -86,22 +93,31 @@ modalContent.addEventListener("click", (event) => {
     console.log(id)
     console.log(event.target)
 
-    createPlayDateForm()
-
-    newPlayDateObj = {
-      petId: id,
-      date: ,
-      location:,
-    }
-
+    createPlayDateForm(id)
   }
 })
 
-//delete button
+//delete playdate button
 modalContent.addEventListener("click", event => {
   if (event.target.matches(".pd-delete")) {
     const id = event.target.dataset.id
     deletePlaydate(id)
+  }
+})
+
+//update playdate Button
+modalContent.addEventListener("click", event => {
+  if (event.target.matches(".pd-update")){c
+    const id = event.target.dataset.id
+
+    // updatePDObj = {
+    //   id: id,
+    //   pet_id: ,
+    //   pet2_id: ,
+    //   date: ,
+    //   location: 
+
+    // }
   }
 })
 
@@ -185,14 +201,24 @@ function playDates(petObj) {
   petObj.playdates.forEach(playdate => {
     const date = document.createElement("li")
     const deleteBtn = document.createElement("button")
+    const updateBtn = document.createElement("button")
 
     deleteBtn.textContent = "Cancel Playdate"
     deleteBtn.dataset.id = playdate.id
     deleteBtn.className = "pd-delete"
 
+    updateBtn.textContent = "Update our Playdate"
+    updateBtn.dataset.id = playdate.id
+    updateBtn.dataset.pet = playdate.pet_id
+    updateBtn.dataset.pet2 = playdate.pet2_id
+    updateBtn.dataset.date = playdate.date
+    updateBtn.dataset.location = playdate.location
+    updateBtn.className = "pd-update"
+
     date.dataset.id = playdate.id
     date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
-    date.append(deleteBtn)
+
+    date.append(deleteBtn, updateBtn)
     allDates.append(date)
   })
 
@@ -212,20 +238,87 @@ modal.addEventListener("click", event => {
 })
 
 // modal form 
-const createPlayDateForm = () => {
+const createPlayDateForm = (petid) => {
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")
   const submitBtn = document.createElement("button")
+
   submitBtn.className = "submit-pd"
   submitBtn.textContent = "Create Playdate"
+
   locationInput.id = "location"
   locationInput.placeholder = "enter location..."
+  
   dateInput.type = "date"
+  dateInput.id = "date"
+  form.append(dateInput, locationInput, submitBtn)
+  modalContent.append(form)
+
+  submitBtn.addEventListener("click", event =>{
+    event.preventDefault()
+
+    pdObj = {
+      pet_id: petid,
+      pet2_id: 121,
+      date: form.date.value,
+      location: form.location.value
+    } 
+    
+    pdPost(pdObj)
+  })
+}
+
+//Updating needs to be adjust potentially refactored from Create
+const playdateUpdate = (petid) => {
+  const form = document.createElement("form")
+  const locationInput = document.createElement("input")
+  const dateInput = document.createElement("input")
+  const submitBtn = document.createElement("button")
+
+  submitBtn.className = "submit-pd"
+  submitBtn.textContent = "Create Playdate"
+
+  locationInput.id = "location"
+  locationInput.placeholder = "enter location..."
+  
+  dateInput.type = "date"
+  dateInput.id = "date"
+  form.append(dateInput, locationInput, submitBtn)
+  modalContent.append(form)
+
+  submitBtn.addEventListener("click", event =>{
+    event.preventDefault()
+
+    pdObj = {
+      pet_id: petid,
+      pet2_id: 121,
+      date: form.date.value,
+      location: form.location.value
+    } 
+    
+    pdPost(pdObj)
+  })
+
+}
+
+const renderForm = () =>{
+  const form = document.createElement("form")
+  const locationInput = document.createElement("input")
+  const dateInput = document.createElement("input")
+  const submitBtn = document.createElement("button")
+
+  submitBtn.className = "submit-pd"
+  submitBtn.textContent = "Create Playdate"
+
+  locationInput.id = "location"
+  locationInput.placeholder = "enter location..."
+  
+  dateInput.type = "date"
+  dateInput.id = "date"
   form.append(dateInput, locationInput, submitBtn)
   modalContent.append(form)
 }
-
 
 
 
