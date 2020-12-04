@@ -2,6 +2,8 @@
 const petContainer = document.querySelector("#pet-collection")
 const modal = document.querySelector(".modal-container")
 const modalContent = document.querySelector(".modal-content")
+const newPetButton = document.querySelector(".add-pet")
+const navSpan = document.querySelector("#nav-span")
 
 
 let allDates;
@@ -153,6 +155,11 @@ modalContent.addEventListener("click", event => {
     }
     playdateUpdate(oldPDObj)
   }
+})
+
+//add a new pet button
+newPetButton.addEventListener("click", event => {
+    renderPetForm()
 })
 
 /*************** Rendering Functions ****************/
@@ -343,5 +350,84 @@ const playdateUpdate = (oldPDObj) => {
 }
 
 
+const renderPetForm = () => {
+  const petForm = document.createElement("form")
+  const petNameInput = document.createElement("input")
+  const petTemperInput = document.createElement("input")
+  const petAgeInput = document.createElement("input")
+  const petBreedInput = document.createElement("input")
+  const petGenderInput = document.createElement("input")
+  const petSpeciesInput = document.createElement("input")
+  const petImageInput = document.createElement("input")
+  const petSubmitBtn = document.createElement("button")
 
+  petSubmitBtn.className = "submit-pet"
+  petSubmitBtn.textContent = "Add Pet"
+
+  petNameInput.id = "name"
+  petNameInput.placeholder = "Pet Name"
+
+  petTemperInput.id = "temper"
+  petTemperInput.placeholder = "Pet's Personality"
+
+  petAgeInput.id = "age"
+  petAgeInput.type = "number"
+  petAgeInput.placeholder = "Pet's Age"
+
+  petBreedInput.id = "breed"
+  petBreedInput.placeholder = "Pet's Breed"
+
+  petGenderInput.id = "gender"
+  petGenderInput.placeholder = "Pet's Gender"
+
+  petSpeciesInput.id = "species"
+  petSpeciesInput.placeholder = "Pet's Species"
+
+  petImageInput.id = "image"
+  petImageInput.placeholder = "Url link of your Pet"
+  
+ 
+
+  petForm.append(petNameInput, petTemperInput, petAgeInput, petBreedInput, petGenderInput,
+     petSpeciesInput, petImageInput, petSubmitBtn)
+  
+  navSpan.append(petForm)
+
+  petSubmitBtn.addEventListener("click", event =>{
+    event.preventDefault()
+
+    addPetObj = {
+      name: petForm.name.value,
+      temper: petForm.temper.value,
+      age: petForm.age.value,
+      breed: petForm.breed.value,
+      gender: petForm.gender.value,
+      species: petForm.species.value,
+      img: petForm.image.value
+    } 
+    
+    createPet(addPetObj)
+
+    console.log(addPetObj)
+
+    petForm.style.display = "none"
+  })
+}
+
+
+
+const createPet = (addPetObj) => {
+  fetch(petUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+  body: JSON.stringify(addPetObj)
+})
+  .then(response => response.json())
+  .then(console.log)
+
+
+}
 fetchPets()

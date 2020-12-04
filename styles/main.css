@@ -10,6 +10,18 @@
 
 }
 
+#nav-bar {
+    display: block;
+    justify-content: center;
+    background: #FF8C94;
+    opacity: .8;
+    height: auto;
+    padding: 1rem;
+    font-size: larger;
+    font-weight: bold;
+
+}
+
 #pet-header img {
     height: 150px;
     width: 100px;
