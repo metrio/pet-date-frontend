@@ -29,7 +29,6 @@ function fetchPets() {
   })
 }
 
-console.log(simplePetArray)
 // Fetch Data to render onto Modal
 const petDetails = (id) => {
   fetch(`${petUrl}/${id}`)
@@ -50,10 +49,8 @@ function deletePlaydate(id) {
   })
     .then(resp => resp.json())
     .then(data => {
-      // console.log(data.id)
       li = document.querySelector(`li[data-id="${data.id}"]`)
       li.remove()
-      //  console.log(li)
     })
 }
 
@@ -70,7 +67,6 @@ const pdPost = (pdObj) => {
   })
     .then(response => response.json())
     .then(pdObj => {   //pd stands for playdate
-      console.log(pdObj)
       const li = document.createElement("li")
       li.dataset.id = pdObj.id
       li.textContent = `Date: ${pdObj.date}, Location: ${pdObj.location}`
@@ -128,8 +124,6 @@ const pdUpdate = (newpdObj) => {
 modalContent.addEventListener("click", (event) => {
   if (event.target.matches("#pd-button")) {
     const id = event.target.dataset.id
-    console.log(id)
-    console.log(event.target)
 
     createPlayDateForm(id)
   }
@@ -147,7 +141,6 @@ modalContent.addEventListener("click", event => {
 modalContent.addEventListener("click", event => {
   if (event.target.matches(".pd-update")){
     const id = event.target.dataset.id
-    console.log(event.target)
 
     oldPDObj = {
       id: id,
@@ -284,6 +277,7 @@ modal.addEventListener("click", event => {
 
 // modal form 
 const createPlayDateForm = (petid) => {
+  
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")
@@ -307,12 +301,11 @@ const createPlayDateForm = (petid) => {
   for (i = 0; i < simplePetArray.length ; i++){
     const petOption = document.createElement('option')
     petOption.value = simplePetArray[i]
-    petOption.textContent = simplePetArray[i]
+    petOption.textContent = simplePetArray[i] 
     petOption.dataset.id = i + 1
 
     friendInput.append(petOption)
   }
-
 
   form.append(dateInput, friendInput, locationInput, submitBtn)
   modalContent.append(form)
@@ -320,9 +313,12 @@ const createPlayDateForm = (petid) => {
   submitBtn.addEventListener("click", event =>{
     event.preventDefault()
 
+
+    petOpt = document.querySelector(`option`)
+
     pdObj = {
       pet_id: petid,
-      pet2_id: 1,
+      pet2_id: 11,
       date: form.date.value,
       location: form.location.value
     } 
@@ -334,7 +330,7 @@ const createPlayDateForm = (petid) => {
 
 //Updating Form 
 const playdateUpdate = (oldPDObj) => {
-  console.log(oldPDObj)
+  
 
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
@@ -428,8 +424,6 @@ const renderPetForm = () => {
     
     createPet(addPetObj)
 
-    console.log(addPetObj)
-
     petForm.style.display = "none"
   })
 }
@@ -447,8 +441,7 @@ const createPet = (addPetObj) => {
 })
   .then(response => response.json())
   .then(newPetObj => {
-    renderPets(newPetObj)
-    console.log})
+    renderPets(newPetObj)})
 
 
 }
