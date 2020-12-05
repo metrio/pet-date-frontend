@@ -41,7 +41,7 @@
   height: 20rem;
   display: inline-grid;
   margin: 1rem 2rem;
-  box-shadow: 3px 4px #FF8C94 
+  box-shadow: 3px 4px #FF8C94; 
 }
 
 .pet-avatar {
@@ -91,3 +91,23 @@
 .show {
   display: block;
 }
+
+.btn-styles {
+  display: inline-block;
+  padding:0.35em 1.2em;
+  border:0.1em solid #A8E6CE;
+  margin:0 0.3em 0.3em 0;
+  border-radius:0.5rem;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:bold;
+  color:#000000;
+  text-align:center;
+  transition: all 0.2s;
+  }
+
+  .btn-styles:hover {
+    color:#000000;
+    background-color:#FF8C94 
+  }
