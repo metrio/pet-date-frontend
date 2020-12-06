@@ -335,7 +335,8 @@ const createPlayDateForm = (petid) => {
     } 
     
     pdPost(pdObj)
-    form.style.display = "none"
+    // form.style.display = "none"
+    form.remove()
   })
 }
 
