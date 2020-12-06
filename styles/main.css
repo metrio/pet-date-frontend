@@ -41,7 +41,7 @@
   height: 20rem;
   display: inline-grid;
   margin: 1rem 2rem;
-  box-shadow: 3px 4px #FF8C94 
+  box-shadow: 3px 4px #FF8C94; 
 }
 
 .pet-avatar {
@@ -91,3 +91,41 @@
 .show {
   display: block;
 }
+
+.btn-styles {
+  display: inline-block;
+  padding:0.35em .75em;
+  border:0.1em solid #A8E6CE;
+  margin:0.5em;
+  border-radius:0.5rem;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  font-weight:bold;
+  color:#000000;
+  text-align:center;
+  transition: all 0.2s;
+  }
+
+  .btn-styles:hover {
+    color:#000000;
+    background-color:#FF8C94 
+  }
+
+  select, input {
+    padding:0.25em .25em;
+    margin:.5em;
+    border-radius: 0.5rem;
+    border: 1.5px solid #A8E6CE;
+    height: 17px;
+    background-color: #EFEFEF;
+  }
+
+  select {
+    height: max-content;
+    background-color:#EFEFEF;
+  }
+
+  /* .modal-deets {
+    margin-inline-start: 15px
+  } */

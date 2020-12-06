@@ -2,7 +2,7 @@
 const petContainer = document.querySelector("#pet-collection")
 const modal = document.querySelector(".modal-container")
 const modalContent = document.querySelector(".modal-content")
-const newPetButton = document.querySelector(".add-pet")
+const newPetButton = document.querySelector("#add-pet")
 const navSpan = document.querySelector("#nav-span")
 
 let simplePetArray = []
@@ -76,12 +76,13 @@ const pdPost = (pdObj) => {
 
       deleteBtn.textContent = "Cancel Playdate"
       deleteBtn.dataset.id = pdObj.id
-      deleteBtn.className = "pd-delete"
+      deleteBtn.className = "btn-styles"
+      deleteBtn.classList.add("pd-delete")
 
       updateBtn.textContent = "Update Our Playdate"
       updateBtn.dataset.id = pdObj.id
       updateBtn.className = "pd-update"
-
+      updateBtn.classList.add("btn-styles")
 
       li.append(deleteBtn, updateBtn)
       allDates.append(li)
@@ -108,11 +109,13 @@ const pdUpdate = (newpdObj) => {
       
       deleteBtn.textContent = "Cancel Playdate"
       deleteBtn.dataset.id = data.id
-      deleteBtn.className = "pd-delete"
+      deleteBtn.className = "btn-styles"
+      deleteBtn.classList.add("pd-delete")
 
       updateBtn.textContent = "Update Our Playdate"
       updateBtn.dataset.id = data.id
       updateBtn.className = "pd-update"
+      updateBtn.classList.add("btn-styles")
 
       li.append(deleteBtn, updateBtn)
     })
@@ -175,6 +178,7 @@ const renderPets = (pet) => {
   petType.textContent = `Breed: ${pet.breed}`
 
   petButton.classList.add("deets")
+  petButton.classList.add("btn-styles")
 
   petButton.textContent = "Pet Deets"
   petButton.dataset.id = pet.id
@@ -205,7 +209,7 @@ const renderPet = (petObj) => {
   const petPersonality = document.createElement("h4")
   const makePlaydateBtn = document.createElement("button")
 
-
+ 
   modalContent.innerHTML = ""
   petName.textContent = `Name: ${petObj.name}`
   petBreed.textContent = `Breed: ${petObj.breed}`
@@ -219,7 +223,7 @@ const renderPet = (petObj) => {
   makePlaydateBtn.textContent = "Wanna Play?"
   makePlaydateBtn.dataset.id = petObj.id
   makePlaydateBtn.id = ("pd-button")
-
+  makePlaydateBtn.className = ("btn-styles")
 
   if (petObj.age > 1) {
     petAge.textContent = `Age: ${petObj.age} years old`
@@ -244,6 +248,7 @@ function playDates(petObj) {
     deleteBtn.textContent = "Cancel Playdate"
     deleteBtn.dataset.id = playdate.id
     deleteBtn.className = "pd-delete"
+    deleteBtn.classList.add("btn-styles")
 
     updateBtn.textContent = "Update our Playdate"
     updateBtn.dataset.id = playdate.id
@@ -252,6 +257,7 @@ function playDates(petObj) {
     updateBtn.dataset.date = playdate.date
     updateBtn.dataset.location = playdate.location
     updateBtn.className = "pd-update"
+    updateBtn.classList.add("btn-styles")
 
     date.dataset.id = playdate.id
     date.textContent = `Date: ${playdate.date}, Location: ${playdate.location}`
@@ -284,7 +290,9 @@ const createPlayDateForm = (petid) => {
   const friendInput = document.createElement("select")
   const submitBtn = document.createElement("button")
 
+
   submitBtn.className = "submit-pd"
+  submitBtn.classList.add("btn-styles")
   submitBtn.textContent = "Create Playdate"
 
   locationInput.id = "location"
@@ -324,7 +332,8 @@ const createPlayDateForm = (petid) => {
     } 
     
     pdPost(pdObj)
-    form.style.display = "none"
+    // form.style.display = "none"
+    form.remove()
   })
 }
 
@@ -337,7 +346,9 @@ const playdateUpdate = (oldPDObj) => {
   const dateInput = document.createElement("input")
   const submitBtn = document.createElement("button")
 
+
   submitBtn.className = "submit-pd"
+  submitBtn.classList.add("btn-styles")
   submitBtn.textContent = "Update Playdate"
 
   locationInput.id = "location"
@@ -378,7 +389,9 @@ const renderPetForm = () => {
   const petImageInput = document.createElement("input")
   const petSubmitBtn = document.createElement("button")
 
+
   petSubmitBtn.className = "submit-pet"
+  petSubmitBtn.classList.add("btn-styles")
   petSubmitBtn.textContent = "Add Pet"
 
   petNameInput.id = "name"
