@@ -216,7 +216,7 @@ const renderPet = (petObj) => {
   const petPersonality = document.createElement("h4")
   const makePlaydateBtn = document.createElement("button")
 
-
+ 
   modalContent.innerHTML = ""
   petName.textContent = `Name: ${petObj.name}`
   petBreed.textContent = `Breed: ${petObj.breed}`
@@ -296,6 +296,7 @@ const createPlayDateForm = (petid) => {
   const friendInput = document.createElement("select")
   const submitBtn = document.createElement("button")
 
+
   submitBtn.className = "submit-pd"
   submitBtn.classList.add("btn-styles")
   submitBtn.textContent = "Create Playdate"
@@ -349,6 +350,7 @@ const playdateUpdate = (oldPDObj) => {
   const dateInput = document.createElement("input")
   const submitBtn = document.createElement("button")
 
+
   submitBtn.className = "submit-pd"
   submitBtn.classList.add("btn-styles")
   submitBtn.textContent = "Update Playdate"
@@ -390,6 +392,7 @@ const renderPetForm = () => {
   const petSpeciesInput = document.createElement("input")
   const petImageInput = document.createElement("input")
   const petSubmitBtn = document.createElement("button")
+
 
   petSubmitBtn.className = "submit-pet"
   petSubmitBtn.classList.add("btn-styles")
