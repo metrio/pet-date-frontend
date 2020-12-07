@@ -318,15 +318,14 @@ const createPlayDateForm = (petid) => {
   form.append(dateInput, friendInput, locationInput, submitBtn)
   modalContent.append(form)
 
-  submitBtn.addEventListener("click", event =>{
+  submitBtn.addEventListener("click", event => {
     event.preventDefault()
 
-
-    petOpt = document.querySelector(`option`)
-
+    const petOption = document.querySelector(`option[value = ${friendInput.value}]`)
+  
     pdObj = {
       pet_id: petid,
-      pet2_id: 11,
+      pet2_id: petOption.dataset.id,
       date: form.date.value,
       location: form.location.value
     } 
@@ -334,13 +333,12 @@ const createPlayDateForm = (petid) => {
     pdPost(pdObj)
     // form.style.display = "none"
     form.remove()
+  
   })
 }
 
 //Updating Form 
 const playdateUpdate = (oldPDObj) => {
-  
-
   const form = document.createElement("form")
   const locationInput = document.createElement("input")
   const dateInput = document.createElement("input")

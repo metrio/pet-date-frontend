@@ -1,4 +1,7 @@
+body {
+  font-family: 'Jost', sans-serif;
 
+}
 
 #pet-header {
     display: flex;
