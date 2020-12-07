@@ -63,7 +63,7 @@ body {
 }
 
 .modal-content {
-  width: 500px;
+  width: 600px;
   height: 600px;
   margin: 0 auto;
   position: relative;
@@ -71,6 +71,11 @@ body {
   z-index: 2;
   padding: 50px 50px;
   overflow: auto;
+  
+}
+
+.modal-content li {
+  list-style: none;
 }
 
 .modal-content img{

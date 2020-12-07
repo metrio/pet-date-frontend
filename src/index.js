@@ -79,7 +79,7 @@ const pdPost = (pdObj) => {
       deleteBtn.className = "btn-styles"
       deleteBtn.classList.add("pd-delete")
 
-      updateBtn.textContent = "Update Our Playdate"
+      updateBtn.textContent = "Update Playdate"
       updateBtn.dataset.id = pdObj.id
       updateBtn.className = "pd-update"
       updateBtn.classList.add("btn-styles")
@@ -112,7 +112,7 @@ const pdUpdate = (newpdObj) => {
       deleteBtn.className = "btn-styles"
       deleteBtn.classList.add("pd-delete")
 
-      updateBtn.textContent = "Update Our Playdate"
+      updateBtn.textContent = "Update Playdate"
       updateBtn.dataset.id = data.id
       updateBtn.className = "pd-update"
       updateBtn.classList.add("btn-styles")
@@ -250,7 +250,7 @@ function playDates(petObj) {
     deleteBtn.className = "pd-delete"
     deleteBtn.classList.add("btn-styles")
 
-    updateBtn.textContent = "Update our Playdate"
+    updateBtn.textContent = "Update Playdate"
     updateBtn.dataset.id = playdate.id
     updateBtn.dataset.pet = playdate.pet_id
     updateBtn.dataset.pet2 = playdate.pet2_id
@@ -402,6 +402,7 @@ const renderPetForm = () => {
   petSubmitBtn.className = "submit-pet"
   petSubmitBtn.classList.add("btn-styles")
   petSubmitBtn.textContent = "Add Pet"
+  petSubmitBtn.type = "submit"
 
   petNameInput.id = "name"
   petNameInput.placeholder = "Pet Name"
@@ -431,8 +432,8 @@ const renderPetForm = () => {
   
   navSpan.append(petForm)
 
-  petSubmitBtn.addEventListener("click", event =>{
-    // event.preventDefault()
+  petForm.addEventListener("submit", event =>{
+    event.preventDefault()
 
     addPetObj = {
       name: petForm.name.value,
