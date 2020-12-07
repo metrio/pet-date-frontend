@@ -57,8 +57,7 @@ body {
 .modal-container {
   height: 100vh;
   width: 100vw;
-  background-color: black;
-  opacity: 85%;
+  background-color: rgba(0, 0, 0, .85);
   position: fixed;
   z-index: 1;
 }
@@ -68,8 +67,9 @@ body {
   height: auto;
   margin: 0 auto;
   position: relative;
-  background-color: blanchedalmond;
+  background-color:#ddf8ee;
   z-index: 2;
+  padding: 50px 50px;
 }
 
 .modal-content img{
@@ -98,7 +98,8 @@ body {
 .btn-styles {
   display: inline-block;
   padding:0.35em .75em;
-  border:0.1em solid #A8E6CE;
+  border:0.1em solid #354941;
+  background-color:#f5b9be; 
   margin:0.5em;
   border-radius:0.5rem;
   box-sizing: border-box;

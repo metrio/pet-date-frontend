@@ -308,7 +308,15 @@ const createPlayDateForm = (petid) => {
 
   for (i = 0; i < simplePetArray.length ; i++){
     const petOption = document.createElement('option')
-    petOption.value = simplePetArray[i]
+    
+    if(simplePetArray[i].includes(' ')){
+      let newPetOption = simplePetArray[i].replace(' ', '-')
+      petOption.value = newPetOption
+    }
+    else {
+      petOption.value = simplePetArray[i]
+    }
+    // debugger
     petOption.textContent = simplePetArray[i] 
     petOption.dataset.id = i + 1
 
@@ -320,9 +328,8 @@ const createPlayDateForm = (petid) => {
 
   submitBtn.addEventListener("click", event => {
     event.preventDefault()
-
-    const petOption = document.querySelector(`option[value = ${friendInput.value}]`)
-  
+    const petOption = document.querySelector(`option[value=${friendInput.value}]`)
+    console.log(petOption.dataset.id)
     pdObj = {
       pet_id: petid,
       pet2_id: petOption.dataset.id,
