@@ -272,13 +272,17 @@ function playDates(petObj) {
 //Toggle modal
 function toggleModal() {
   modal.classList.toggle(`${toggle}`)
-  modalContent.classList.toggle(`${toggle}`)
+  // modalContent.classList.toggle(`${toggle}`)
 }
 
 modal.addEventListener("click", event => {
-  event.target.matches(".modal-container")
-  toggle = "hide"
-  toggleModal(toggle)
+  // console.log(event.target)
+  if (event.target.dataset.action === "close") {
+    // debugger
+    toggle = "hide"
+    toggleModal(toggle)
+
+  }
 })
 
 // modal form 

@@ -64,12 +64,13 @@ body {
 
 .modal-content {
   width: 500px;
-  height: auto;
+  height: 600px;
   margin: 0 auto;
   position: relative;
   background-color:#ddf8ee;
   z-index: 2;
   padding: 50px 50px;
+  overflow: auto;
 }
 
 .modal-content img{
@@ -84,6 +85,7 @@ body {
     border-radius: 50%;
     height: 150px;
     width: auto;
+    
 }
 
 .hide {
